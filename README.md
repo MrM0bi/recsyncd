@@ -97,4 +97,4 @@ sqlite3 /var/lib/recsyncd/state.db "DELETE FROM files"
 
 ## License
 
-Internal tool. No license specified.
+GNU General Public License v3.0 or later. See [LICENSE](LICENSE).
