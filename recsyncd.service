@@ -1,0 +1,18 @@
+[Unit]
+Description=Innovaphone Recording Daemon
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=recdaemon # replace with your user
+ExecStart=/opt/recsyncd/.venv/bin/python /opt/recsyncd/recsyncd.py /opt/recsyncd/config.yaml
+StandardOutput=journal
+StandardError=journal
+
+# Harden
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,47 @@
+# Innovaphone Recording Daemon — example config
+# Copy to config.yaml and adapt
+
+webdav_url: "https://pbx.example.com/recordings/"
+webdav_user: "admin"
+webdav_password: "secret"
+
+destination_path: "/mnt/share/recordings"
+
+# Polling
+poll_interval: 10     # seconds between WebDAV polls
+stable_checks: 2      # file must have same non-zero size N polls in a row → complete
+orphan_checks: 3      # consecutive polls a file must be absent before its DB row is deleted
+
+# Storage
+temp_dir: "/tmp/recsyncd"
+db_path: "/var/lib/recsyncd/state.db"
+
+# Logging — daily rotating log files
+log_level: "INFO"                   # DEBUG, INFO, WARNING, ERROR, CRITICAL
+# log_dir: "/var/log/recsyncd"   # uncomment to write YYYY-MM-DD.log files here
+log_retention_days: 30              # delete log files older than this many days
+
+# SMTP error notifications — remove comments to enable
+# smtp_host: "mail.example.com"
+# smtp_port: 587
+# smtp_user: "alerts@example.com"
+# smtp_password: "secret"
+# smtp_from: "recsyncd@example.com"
+# smtp_to:
+#   - "admin@example.com"
+#   - "oncall@example.com"
+# smtp_level: "ERROR"              # WARNING, ERROR, CRITICAL
+# smtp_use_tls: true               # STARTTLS (port 587); set false for plain SMTP
+# smtp_interval: 600               # seconds between digest emails (default: 10 minutes)
+
+# TLS — set false only for self-signed certs in dev
+tls_verify: true
+
+
+# Username filter — only download/process files whose name contains one of these strings.
+# Case-insensitive substring match against the pcap filename.
+# Empty list (default) = process all files.
+user_filter: []
+# user_filter:
+#   - "benjamin.herbst"
+#   - "max.mustermann"
